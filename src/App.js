@@ -15,7 +15,13 @@ class App extends Component {
       fname: '',
       lname: '',
       title: '',
-      img: ''
+      img: '',
+      houseNo: '',
+      streetName: '',
+      postCode:'',
+      county: '',
+      country:'',
+      personalStat: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,8 +35,8 @@ class App extends Component {
   }
 
 
-  handleImg(event){
-    this.setState({img: URL.createObjectURL(event.target.files[0])});
+  handleImg(filename){
+    this.setState({img: URL.createObjectURL(filename)});
   }
 
   handleSubmit(event){
@@ -47,13 +53,29 @@ class App extends Component {
     let varOut = '';
     if(!this.state.output){
       varOut =  <form  className='personal-info js-personal-info' onSubmit={evt => this.handleSubmit(evt)} >
-                    <Info fname={this.state.fname} lname={this.state.lname} title={this.state.title} onChange={this.handleChange} />
-                    <label htmlFor="img">Upload Cover Photo:</label>
-                    <input type="file" id="img" name="img" accept="image/*" onChange={this.handleImg} />
+                    <Info fname={this.state.fname} lname={this.state.lname} title={this.state.title} 
+                          houseNo={this.state.houseNo}
+                          streetName={this.state.streetName} 
+                          postCode={this.state.postCode}
+                          county={this.state.county} 
+                          country={this.state.country} 
+                          personalStat = {this.state.personalStat} 
+                          onChange={this.handleChange}
+                          onChangeImg = {this.handleImg} />
+                    {/*<label htmlFor="img">Upload Cover Photo:</label>
+                    <input type="file" id="img" name="img" accept="image/*" onChange={this.handleImg} />*/}
                 </form>
     }
     else if(this.state.output){
-      varOut = <Output fname={this.state.fname} lname={this.state.lname} img={this.state.img}/>;
+      varOut = <Output title={this.state.title} fname={this.state.fname} 
+                        lname={this.state.lname} 
+                        img={this.state.img} 
+                        houseNo={this.state.houseNo}
+                        streetName={this.state.streetName} 
+                        postCode={this.state.postCode}
+                        county={this.state.county} 
+                        country={this.state.country} 
+                        personalStat = {this.state.personalStat} />;
     }
 
     return (
