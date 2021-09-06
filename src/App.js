@@ -4,7 +4,9 @@ import AddImageSvg from './photo.svg';
 import Navbar from './components/Navbar.js';
 import Output from './components/Output.js';
 import Info from './components/Info.js';
+import Education from './components/Education.js';
 import React, {Component} from "react";
+import uniqid from "uniqid";
 
 
 class App extends Component {
@@ -22,11 +24,30 @@ class App extends Component {
       county: '',
       country:'',
       personalStat: '',
+
+      countEdu: 2,
+
+      eduObj: {
+        university: '',
+        city: '',
+        degree: '',
+        subject: '',
+        from: '',
+        to: '',
+        //id: uniqid(),
+      },
+
+      educationLst: [
+
+      ],
+
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleImg = this.handleImg.bind(this);
-    //this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeEducation = this.handleChangeEducation.bind(this)
+    this.handleDelete = this.handleDelete.bind(this);
+    this.addEducation = this.addEducation.bind(this);
   }
 
 
@@ -39,8 +60,53 @@ class App extends Component {
     this.setState({img: URL.createObjectURL(filename)});
   }
 
+
+  handleChangeEducation(eduId, eduClassName, eduValue) {
+    let idx = eduId;
+    let idxRep = Number(idx.replace(/\D+/g, ''));
+    let newObj = this.state.educationLst[idxRep];
+    newObj[`${eduClassName}`] = eduValue
+    let newLst = [...this.state.educationLst];
+    newLst[idxRep] = newObj;
+    this.setState({
+      educationLst: newLst
+    })
+
+  }
+
+
+
   handleSubmit(event){
     this.setState({output: true});
+    event.preventDefault();
+  }
+
+
+  handleDelete(deleteIdx){
+    let idxRep = Number(deleteIdx.replace(/\D+/g, ''));
+    let newLst = [...this.state.educationLst];
+    newLst.splice(idxRep, 1);
+    this.setState({
+      educationLst: newLst
+    })
+    
+  }
+
+  addEducation(event){
+    let newIdObj = this.state.eduObj;
+    newIdObj['id'] = uniqid();
+    this.setState({
+      eduObj: {
+        university: '',
+        city: '',
+        degree: '',
+        subject: '',
+        from: '',
+        to: '',
+        id: uniqid(),
+      },
+      educationLst: [...this.state.educationLst, this.state.eduObj],
+    })
     event.preventDefault();
   }
 
@@ -48,7 +114,8 @@ class App extends Component {
 
 
   render() {
-    console.log(this.state.img)
+    console.log(this.state.educationLst)
+
 
     let varOut = '';
     if(!this.state.output){
@@ -62,9 +129,13 @@ class App extends Component {
                           personalStat = {this.state.personalStat} 
                           onChange={this.handleChange}
                           onChangeImg = {this.handleImg} />
-                    {/*<label htmlFor="img">Upload Cover Photo:</label>
-                    <input type="file" id="img" name="img" accept="image/*" onChange={this.handleImg} />*/}
+                    <Education educationLst = {this.state.educationLst} onChange={this.handleChangeEducation} 
+                                onClick={this.handleDelete}/>
+                    <input type="button" value="Add Education" className="add-education" onClick={this.addEducation}/>
+
+                    <input type="submit" value="Submit" />
                 </form>
+                
     }
     else if(this.state.output){
       varOut = <Output title={this.state.title} fname={this.state.fname} 
@@ -75,7 +146,8 @@ class App extends Component {
                         postCode={this.state.postCode}
                         county={this.state.county} 
                         country={this.state.country} 
-                        personalStat = {this.state.personalStat} />;
+                        personalStat = {this.state.personalStat} 
+                        educationItems = {this.state.educationLst} />;
     }
 
     return (

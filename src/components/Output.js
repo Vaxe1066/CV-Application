@@ -21,6 +21,15 @@ class Output extends Component {
                         {this.props.county} <br/>
                         {this.props.country} 
                     </p>
+                    <br/>
+                    <h4>Education</h4>
+                    {this.props.educationItems.map((item)=> {
+                        return(
+                            <div key={item.id.toString()}>
+                            <p>{item.university}</p>
+                            </div>
+                        )
+                    })}
 
                 </div>
                 

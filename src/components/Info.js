@@ -37,7 +37,7 @@ class Info extends Component {
                     <textarea id='personalStat' placeholder ='Say Something About Yourself...' type='text' value={this.props.personalStat} onChange={myFunc}   maxLength='500' />
                     <label htmlFor="img">Upload Cover Photo:</label>
                     <input type="file" id="img" name="img" accept="image/*" onChange={imgFunc} />
-                    <input type="submit" value="Submit" />
+                    {/*<input type="submit" value="Submit" />*/}
                 {/*</form>*/}
             </div>
         );
