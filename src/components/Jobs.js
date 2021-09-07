@@ -35,6 +35,8 @@ class Jobs extends Component {
                                 value={item.from} onChange={myFunc}/>
                         <input className='to' id={`i_${index}`} placeholder='To' type="text" 
                                 value={item.to} onChange={myFunc}/>
+                        <textarea className='jobPoints' id={`i_${index}`}  placeholder ='Say Something About You Experiences...' type='text' 
+                                    value={item.jobPoints} onChange={myFunc}   maxLength='500' />
                         <input className="delete" id={`i_${index}`} type="button" value="Delete" onClick={myDelete}/>
 
                     </div>

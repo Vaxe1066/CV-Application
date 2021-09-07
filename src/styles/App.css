@@ -27,7 +27,7 @@
   min-width: 100%;
 }*/
 
-.personal-info{
+.personal-info, .output{
   margin-top: 10px;
   grid-column:1;
   grid-row: 2/10;
@@ -64,7 +64,7 @@ textarea {
 
 
 .add-experience, .add-education{
-  background-color: #84FF33;
+  background-color: #32D7F7;;
   cursor: pointer;
   font-size: 16px;
 }
@@ -88,7 +88,26 @@ textarea {
 }
 
 
+.main-output{
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
 
+
+.top-info{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  justify-self: space-between ;
+}
+
+
+.face-image{
+  height: 120px;
+  width: 100px;
+}
 
 
 /*

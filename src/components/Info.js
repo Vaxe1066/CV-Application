@@ -39,7 +39,7 @@ class Info extends Component {
                     {/*<input type="submit" value="Submit" />*/}
                 {/*</form>*/}
             </div>
-        );
+        )
     }
 }
 

@@ -1,5 +1,6 @@
 import './styles/App.css';
 import './styles/Navbar.css';
+import './styles/Output.css';
 import AddImageSvg from './photo.svg';
 import Navbar from './components/Navbar.js';
 import Output from './components/Output.js';
@@ -36,6 +37,7 @@ class App extends Component {
         subject: '',
         from: '',
         to: '',
+        eduPoints: '',
         //id: uniqid(),
       },
 
@@ -49,6 +51,7 @@ class App extends Component {
         city: '',
         from: '',
         to: '',
+        jobPoints: '',
 
       },
 
@@ -174,7 +177,9 @@ class App extends Component {
                         county={this.state.county} 
                         country={this.state.country} 
                         personalStat = {this.state.personalStat} 
-                        educationItems = {this.state.educationLst} />;
+                        educationItems = {this.state.educationLst} 
+                        jobsLst={this.state.jobsLst}
+                              />;
                     <div className="edit-cv-div js-edit-cv-div">
                         <input className="edit-cv" type="button" value="Edit CV" onClick={this.handleEditCv}/>
                     </div>
@@ -187,7 +192,7 @@ class App extends Component {
         {varOut};
       </div>
       
-    );
+    )
   }
 
 }

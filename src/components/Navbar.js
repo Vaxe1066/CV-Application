@@ -12,7 +12,7 @@ class Navbar extends Component {
             <div className='Navbar'>
                 <h1>CV Creator</h1>
             </div>
-        );
+        )
     }
 }
 
