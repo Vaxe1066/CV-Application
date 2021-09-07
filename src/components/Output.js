@@ -16,8 +16,7 @@ class Output extends Component {
                 <div className="address">
                     <h4>Address and Contact</h4>
                     <p>{this.props.houseNo} {this.props.streetName} <br/> 
-                        {this.props.postCode} <br/> 
-                        {this.props.postCode} <br/> 
+                        {this.props.postCode} <br/>  
                         {this.props.county} <br/>
                         {this.props.country} 
                     </p>
@@ -26,11 +25,13 @@ class Output extends Component {
                     {this.props.educationItems.map((item)=> {
                         return(
                             <div key={item.id.toString()}>
-                            <p>{item.university}</p>
+                            <p>{item.university}<br/> 
+                            {item.city}<br/> 
+                            {item.subject}{item.degree}
+                            </p><br/> 
                             </div>
                         )
                     })}
-
                 </div>
                 
                 <img src={this.props.img} alt="my face"/>

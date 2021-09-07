@@ -5,8 +5,10 @@ import Navbar from './components/Navbar.js';
 import Output from './components/Output.js';
 import Info from './components/Info.js';
 import Education from './components/Education.js';
+import Jobs from './components/Jobs.js';
 import React, {Component} from "react";
 import uniqid from "uniqid";
+
 
 
 class App extends Component {
@@ -41,13 +43,25 @@ class App extends Component {
 
       ],
 
+      jobsObj: {
+        position: '',
+        company: '',
+        city: '',
+        from: '',
+        to: '',
+
+      },
+
+      jobsLst: [],
+
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleImg = this.handleImg.bind(this);
-    this.handleChangeEducation = this.handleChangeEducation.bind(this)
+    this.handleChangeSections = this.handleChangeSections.bind(this)
     this.handleDelete = this.handleDelete.bind(this);
-    this.addEducation = this.addEducation.bind(this);
+    this.addSection = this.addSection.bind(this);
+    this.handleEditCv = this.handleEditCv.bind(this);
   }
 
 
@@ -60,27 +74,19 @@ class App extends Component {
     this.setState({img: URL.createObjectURL(filename)});
   }
 
-
-  handleChangeEducation(eduId, eduClassName, eduValue) {
+  /**** Education here  ******/
+  handleChangeSections = (eduId, eduClassName, eduValue, array, propName) => {
     let idx = eduId;
     let idxRep = Number(idx.replace(/\D+/g, ''));
-    let newObj = this.state.educationLst[idxRep];
+    let newObj = array[idxRep];
     newObj[`${eduClassName}`] = eduValue
-    let newLst = [...this.state.educationLst];
+    let newLst = [...array];
     newLst[idxRep] = newObj;
     this.setState({
-      educationLst: newLst
+      [`${propName}`]: newLst
     })
 
   }
-
-
-
-  handleSubmit(event){
-    this.setState({output: true});
-    event.preventDefault();
-  }
-
 
   handleDelete(deleteIdx){
     let idxRep = Number(deleteIdx.replace(/\D+/g, ''));
@@ -92,20 +98,22 @@ class App extends Component {
     
   }
 
-  addEducation(event){
-    let newIdObj = this.state.eduObj;
+
+
+
+  addSection = (event, object, array) => {
+    let newIdObj = this.state[`${object}`];
     newIdObj['id'] = uniqid();
     this.setState({
-      eduObj: {
-        university: '',
+      [`${object}`]: {
+        position: '',
+        company: '',
         city: '',
-        degree: '',
-        subject: '',
         from: '',
         to: '',
         id: uniqid(),
       },
-      educationLst: [...this.state.educationLst, this.state.eduObj],
+      [`${array}`]: [...this.state[`${array}`], this.state[`${object}`]],
     })
     event.preventDefault();
   }
@@ -113,13 +121,26 @@ class App extends Component {
 
 
 
-  render() {
-    console.log(this.state.educationLst)
 
+  handleSubmit(event){
+    this.setState({output: true});
+    event.preventDefault();
+  }
+
+  handleEditCv(event){
+    this.setState({output: false})
+  }
+
+
+
+
+
+  render() {
 
     let varOut = '';
     if(!this.state.output){
       varOut =  <form  className='personal-info js-personal-info' onSubmit={evt => this.handleSubmit(evt)} >
+                    <h3>Personal Information</h3>
                     <Info fname={this.state.fname} lname={this.state.lname} title={this.state.title} 
                           houseNo={this.state.houseNo}
                           streetName={this.state.streetName} 
@@ -129,16 +150,22 @@ class App extends Component {
                           personalStat = {this.state.personalStat} 
                           onChange={this.handleChange}
                           onChangeImg = {this.handleImg} />
-                    <Education educationLst = {this.state.educationLst} onChange={this.handleChangeEducation} 
+                    <h3>Education</h3>
+                    <Education educationLst = {this.state.educationLst} onChange={this.handleChangeSections} 
                                 onClick={this.handleDelete}/>
-                    <input type="button" value="Add Education" className="add-education" onClick={this.addEducation}/>
+                    <input type="button" value="Add Education" className="add-education" onClick={e => this.addSection(e,"eduObj", "educationLst" )}/>
+                    <h3>Experience</h3>
+                    <Jobs jobsLst = {this.state.jobsLst} onChange={this.handleChangeSections} 
+                                onClick={this.handleDelete}/>
+                    <input type="button" value="Add Experience" className="add-experience" onClick={e => this.addSection(e,"jobsObj", "jobsLst" )}/>
 
-                    <input type="submit" value="Submit" />
+                    <input className="submit" type="submit" value="Submit" />
                 </form>
                 
     }
     else if(this.state.output){
-      varOut = <Output title={this.state.title} fname={this.state.fname} 
+      varOut =<div className="output"> 
+              <Output title={this.state.title} fname={this.state.fname} 
                         lname={this.state.lname} 
                         img={this.state.img} 
                         houseNo={this.state.houseNo}
@@ -148,6 +175,10 @@ class App extends Component {
                         country={this.state.country} 
                         personalStat = {this.state.personalStat} 
                         educationItems = {this.state.educationLst} />;
+                    <div className="edit-cv-div js-edit-cv-div">
+                        <input className="edit-cv" type="button" value="Edit CV" onClick={this.handleEditCv}/>
+                    </div>
+              </div>
     }
 
     return (

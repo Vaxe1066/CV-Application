@@ -5,12 +5,12 @@ class Education extends Component {
     constructor(props){
         super(props);
 
-        this.handleChangeEducation = this.handleChangeEducation.bind(this);
+        this.handleChangeSections = this.handleChangeSections.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
     }
 
-    handleChangeEducation = (event) => {
-        this.props.onChange( event.target.id, event.target.className, event.target.value);
+    handleChangeSections = (event) => {
+        this.props.onChange( event.target.id, event.target.className, event.target.value, this.props.educationLst, "educationLst");
     }
 
     handleDelete= (event) => {
@@ -21,7 +21,7 @@ class Education extends Component {
 
     render(){
 
-        let myFunc = this.handleChangeEducation;
+        let myFunc = this.handleChangeSections;
         let myDelete = this.handleDelete;
         return(
             <div className="education-form js-education-form">
