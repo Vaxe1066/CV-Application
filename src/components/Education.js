@@ -30,19 +30,19 @@ class Education extends Component {
 
                         <div className="indi-edu-form js-indi-edu-form" key={item.id.toString()}>
                             <input className='university' id={`i_${index}`} placeholder='University/College' type="text"
-                            value={item.university} onChange={myFunc} />
+                                    value={item.university || '' } onChange={myFunc} />
                             <input className='city' id={`i_${index}`} placeholder='City' type="text" 
-                                    value={item.city} onChange={myFunc}/>
+                                    value={item.city || ''} onChange={myFunc}/>
                             <input className='degree' id={`i_${index}`} placeholder='Degree' type="text" 
-                                    value={item.degree} onChange={myFunc}/>
+                                    value={item.degree || ''} onChange={myFunc}/>
                             <input className='subject' id={`i_${index}`} placeholder='Subject' type="text" 
-                                    value={item.subject} onChange={myFunc}/>
+                                    value={item.subject || ''} onChange={myFunc}/>
                             <input className='from' id={`i_${index}`} placeholder='From' type="text" 
-                                    value={item.from} onChange={myFunc}/>
+                                    value={item.from || ''} onChange={myFunc}/>
                             <input className='to' id={`i_${index}`} placeholder='To' type="text" 
-                                    value={item.to} onChange={myFunc}/>
+                                    value={item.to || ''} onChange={myFunc}/>
                             <textarea className='eduPoints' id={`i_${index}`}  placeholder ='Say Something About You Experiences...' type='text' 
-                                                value={item.eduPoints} onChange={myFunc}   maxLength='500' />
+                                    value={item.eduPoints || ''} onChange={myFunc}   maxLength='500' />
                             <input className="delete" id={`i_${index}`} type="button" value="Delete" onClick={myDelete}/>
 
                         </div>

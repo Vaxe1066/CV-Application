@@ -41,9 +41,7 @@ class App extends Component {
         //id: uniqid(),
       },
 
-      educationLst: [
-
-      ],
+      educationLst: [],
 
       jobsObj: {
         position: '',
