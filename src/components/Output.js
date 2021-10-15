@@ -1,14 +1,29 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 class Output extends Component {
     constructor(props){
         super(props);
 
+        this.printDocument = this.printDocument.bind(this)
+
     }
 
-
+printDocument() {
+    const input = document.querySelector('.main-output');
+    html2canvas(input)
+        .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        pdf.addImage(imgData, 'JPEG', 0, 0);
+        // pdf.output('dataurlnewwindow');
+        pdf.save("download.pdf");
+        })
+    ;
+    }
     render(){
-        return(
+        return(<div>
             <div className="main-output">
                 <div className="top-bar">
                     <div className="fullName">
@@ -77,7 +92,11 @@ class Output extends Component {
                     })}
             
                 
-                
+            
+            </div>
+                <div className="mb5">
+                  <button onClick={this.printDocument}>Print</button>
+                </div>
             </div>
         )
     }

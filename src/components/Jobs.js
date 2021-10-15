@@ -13,7 +13,7 @@ class Jobs extends Component {
     }
 
     handleDelete= (event) => {
-        this.props.onClick( event.target.id);
+        this.props.onClick( event.target.id, this.props.jobsLst, "jobsLst" );
     }
 
     render(){

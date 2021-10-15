@@ -89,12 +89,13 @@ class App extends Component {
 
   }
 
-  handleDelete(deleteIdx){
+  handleDelete(deleteIdx, array, propName){
     let idxRep = Number(deleteIdx.replace(/\D+/g, ''));
-    let newLst = [...this.state.educationLst];
+    //let newLst = [...this.state.educationLst];
+    let newLst = [...array];
     newLst.splice(idxRep, 1);
     this.setState({
-      educationLst: newLst
+      [`${propName}`]: newLst
     })
     
   }
@@ -165,7 +166,8 @@ class App extends Component {
                 
     }
     else if(this.state.output){
-      varOut =<div className="output"> 
+      varOut = <div>
+          <div className="output"> 
               <Output title={this.state.title} fname={this.state.fname} 
                         lname={this.state.lname} 
                         img={this.state.img} 
@@ -178,9 +180,11 @@ class App extends Component {
                         educationItems = {this.state.educationLst} 
                         jobsLst={this.state.jobsLst}
                               />;
-                    <div className="edit-cv-div js-edit-cv-div">
+
+              </div>
+              <div className="edit-cv-div js-edit-cv-div">
                         <input className="edit-cv" type="button" value="Edit CV" onClick={this.handleEditCv}/>
-                    </div>
+              </div>
               </div>
     }
 
